@@ -12,5 +12,15 @@
   "scripts": {
     "start": "cds-serve"
   },
+<<<<<<< Updated upstream
+=======
+  "cds": {
+    "requires": {
+    "auth": {
+      "kind": "dummy"
+    }
+    }
+  },
+>>>>>>> Stashed changes
   "private": true
 }
