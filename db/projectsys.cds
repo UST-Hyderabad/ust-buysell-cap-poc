@@ -171,8 +171,6 @@ entity PROJ {
 
 @title      : 'WBS Elements'
 entity WBSElements {
-
-
     key PSPNR                  : String(8) not null @title: 'WBS Element ID';
         POSID                  : String(24)         @title: 'WBS Element';
         POST1                  : String(40)         @title: 'Description';

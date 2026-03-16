@@ -16,14 +16,17 @@
   },
   "cds": {
     "requires": {
-    "auth": {
-      "kind": "dummy"
-    },
-      "db": {
-        "kind": "postgres",
-        "credentials": {
-          "schema": "testing_poc"
-        }
+      "[postgres]": {
+        "db": {
+          "kind": "postgres"
+        },
+        "auth": "dummy"
+      },
+      "[sqlite]": {
+        "db": {
+          "kind": "sqlite"
+        },
+        "auth": "dummy"
       }
     }
   },
