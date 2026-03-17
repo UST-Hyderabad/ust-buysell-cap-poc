@@ -1,10 +1,10 @@
-namespace ust.buysell.masterdata.projectsys;
+namespace ust.buysell.procurement;
 
 using {Currency} from '@sap/cds/common';
 
 
-@title      : 'Project Definition'
-entity PROJ {
+@title: 'Project Definition'
+entity Project {
     key PSPNR             : String(8) not null @title: 'Project';
 
         PSPID             : String(24)         @title: 'Project Definition';
@@ -65,7 +65,7 @@ entity PROJ {
         SPSNR             : String(8)          @title: 'Current Number for Standard Project';
 
         BESTA             : String(1)          @title: 'Project Stock';
-        SCOPE             : String(15)          @title: 'Object Class';
+        SCOPE             : String(15)         @title: 'Object Class';
         XSTAT             : String(1)          @title: 'Statistical WBS Element';
         TXJCD             : String(15)         @title: 'Tax Jurisdiction';
 
@@ -74,7 +74,7 @@ entity PROJ {
         IMPRF             : String(6)          @title: 'Investment Measure Profile';
         FMPRF             : String(6)          @title: 'Payment Plan Profile';
 
-        ABGSL             : String(40)          @title: 'Results Analysis Key';
+        ABGSL             : String(40)         @title: 'Results Analysis Key';
         POSTU             : String(40)         @title: 'PS Short Description (All Caps)';
         PPROF             : String(6)          @title: 'Planning Profile';
         PLINT             : String(1)          @title: 'Indicator for Integrated Planning';
@@ -110,7 +110,7 @@ entity PROJ {
         RECID             : String(2)          @title: 'Recovery Indicator';
         ETYPE             : String(3)          @title: 'Equity Type';
         OTYPE             : String(4)          @title: 'Joint Venture Object Type';
-        JIBCL             : String(15)          @title: 'JIB/JIBE Class';
+        JIBCL             : String(15)         @title: 'JIB/JIBE Class';
         JIBSA             : String(5)          @title: 'JIB/JIBE Subclass A';
 
 
@@ -155,7 +155,7 @@ entity PROJ {
         USR10             : String(5)          @title: 'User-Defined Indicator (1)';
         USR11             : String(1)          @title: 'User-Defined Indicator (2)';
 
-        CPD_UPDAT         : String(40)     @title: 'Time Stamp';
+        CPD_UPDAT         : String(40)         @title: 'Time Stamp';
         FERC_IND          : String(4)          @title: 'Regulatory Indicator';
 
         AVC_PROFILE       : String(6)          @title: 'Budget Availability Control Profile';
@@ -169,7 +169,7 @@ entity PROJ {
 }
 
 
-@title      : 'WBS Elements'
+@title: 'WBS Elements'
 entity WBSElements {
 
 
@@ -177,7 +177,7 @@ entity WBSElements {
         POSID                  : String(24)         @title: 'WBS Element';
         POST1                  : String(40)         @title: 'Description';
         OBJNR                  : String(22)         @title: 'Object Number';
-        PSPHI                  : Association to PROJ;
+        PSPHI                  : Association to Project;
         POSKI                  : String(16)         @title: 'WBS Identification';
         ERNAM                  : String(12)         @title: 'Created By';
         ERDAT                  : Date               @title: 'Created On';
@@ -230,8 +230,8 @@ entity WBSElements {
         USE07                  : String(5)          @title: 'User Currency 2 Key';
         USR08                  : Date               @title: 'User Date 1';
         USR09                  : Date               @title: 'User Date 2';
-        USR10                  : String(1)            @title: 'User Flag 1';
-        USR11                  : String(1)            @title: 'User Flag 2';
+        USR10                  : String(1)          @title: 'User Flag 1';
+        USR11                  : String(1)          @title: 'User Flag 2';
         KOSTL                  : String(10)         @title: 'Responsible Cost Center';
         KTRG                   : String(12)         @title: 'Cost Object';
         BERST                  : String(16)         @title: 'Statistical Key Figure';
@@ -240,7 +240,7 @@ entity WBSElements {
         BERBU                  : String(16)         @title: 'Stat. Key Figure (Budget)';
         CLASF                  : String(1)          @title: 'Classification';
         SPSNR                  : String(8)          @title: 'Summarization WBS Element';
-        SCOPE                  : String(18)          @title: 'Object Class';
+        SCOPE                  : String(18)         @title: 'Object Class';
         XSTAT                  : String(1)          @title: 'Statistical Element';
         TXJCD                  : String(15)         @title: 'Tax Jurisdiction';
         ZSCHM                  : String(7)          @title: 'Interest Calc. Schema';
@@ -250,7 +250,7 @@ entity WBSElements {
         SUBPR                  : String(12)         @title: 'Sub-Project';
         POSTU                  : String(40)         @title: 'Long Description';
         PLINT                  : String(1)          @title: 'Planning Indicator';
-        LOEVM                  : String(1)            @title: 'Deletion Flag';
+        LOEVM                  : String(1)          @title: 'Deletion Flag';
         KZBWS                  : String(1)          @title: 'Valuation Indicator';
         FPLNR                  : String(10)         @title: 'Billing Plan';
         TADAT                  : Date               @title: 'Deadline Date';
@@ -258,7 +258,7 @@ entity WBSElements {
         ISIZE                  : String(2)          @title: 'Investment Scale';
         IUMKZ                  : String(5)          @title: 'Environmental Protection';
         ABUKR                  : String(4)          @title: 'Appropriation Request Co. Code';
-        GRPKZ                  : String(1)            @title: 'Group WBS Element';
+        GRPKZ                  : String(1)          @title: 'Group WBS Element';
         PGPRF                  : String(6)          @title: 'Project Profile';
         LOGSYSTEM              : String(10)         @title: 'Logical System';
         PSPNR_LOGS             : String(8)          @title: 'WBS ID (Logical System)';
@@ -288,12 +288,12 @@ entity WBSElements {
         EEW_PRPS_PS_DUMMY      : String(1)          @title: 'Enhancement Dummy';
         RFUND                  : String(10)         @title: 'Fund';
         RGRANT_NBR             : String(20)         @title: 'Grant Number';
-        FUND_FIX_ASSIGN        : String(1)            @title: 'Fund Fixed Assignment';
-        GRANT_FIX_ASSIGNED     : String(1)            @title: 'Grant Fixed Assignment';
-        FUNC_AREA_FIX_ASSIGNED : String(1)            @title: 'Functional Area Fixed';
+        FUND_FIX_ASSIGN        : String(1)          @title: 'Fund Fixed Assignment';
+        GRANT_FIX_ASSIGNED     : String(1)          @title: 'Grant Fixed Assignment';
+        FUNC_AREA_FIX_ASSIGNED : String(1)          @title: 'Functional Area Fixed';
         SPONSOREDPROG          : String(20)         @title: 'Sponsored Program';
-        SETTLEMENTELEMENT      : String(1)            @title: 'Settlement Element';
-        SETTLMTRULEINHERITED   : String(1)            @title: 'Settlement Rule Inherited';
+        SETTLEMENTELEMENT      : String(1)          @title: 'Settlement Element';
+        SETTLMTRULEINHERITED   : String(1)          @title: 'Settlement Rule Inherited';
         SETTLEMENTOBJECT       : String(22)         @title: 'Settlement Object';
         CPD_UPDAT              : Decimal(15, 0)     @title: 'CPD Last Updated';
         FERC_IND               : String(4)          @title: 'FERC Indicator';
@@ -315,10 +315,16 @@ entity WBSElements {
         ZCPM_AMR_FSST          : Date               @title: 'AMR Forecast Start Date';
         ZCPM_AMR_FSFT          : Date               @title: 'AMR Forecast Finish Date';
 
-        to_soHeader :   Association to many SalesOrderHeader on to_soHeader.wbsElement = PSPNR;
-        to_soItem   : Association to many SalesOrderItem on to_soItem.wbsElement = PSPNR;
+        to_soHeader            : Association to many SalesOrderHeader
+                                     on to_soHeader.wbsElement = PSPNR;
+        to_soItem              : Association to many SalesOrderItem
+                                     on to_soItem.wbsElement = PSPNR;
 
-        to_poHeader : Association to many PurchaseDocumentHeader on to_poHeader.PSPNR = $self;
+        to_poHeader            : Association to many PurchaseDocumentHeader
+                                     on to_poHeader.PSPNR = PSPNR;
+        to_poItem              : Association to many PurchaseOrderItem
+                                     on to_poItem.PSPNR = PSPNR;
+
 }
 
 
@@ -334,9 +340,9 @@ entity SalesOrderHeader {
         documentDate                       : Date; // AUDAT
         salesDocumentCategory              : String(1); // VBTYP
         transactionGroup                   : String(1); // TRVOG
-        salesDocumentType                  : String(4); // AUART    
+        salesDocumentType                  : String(4); // AUART
         orderReason                        : String(3); // AUGRU
-        
+
         warrantyDate                       : Date; // GWLDT
         collectiveNumber                   : String(10); // SUBMI
         deliveryBlock                      : String(2); // LIFSK
@@ -805,7 +811,7 @@ entity SalesOrderItem {
 
 entity PurchaseDocumentHeader {
     key EBELN                 : String(10)     @title: 'Purchasing Document Number';
-    key PSPNR                 : Association to projectsys.WBSElements     @title :'Key of WBSElemnt';
+    key PSPNR                 : String(8)      @title: 'Key of WBSElemnt';
         BUKRS                 : String(4)      @title: 'Company Code';
         BSTYP                 : String(1)      @title: 'Purchasing Document Category';
         BSART                 : String(4)      @title: 'Purchasing Document Type';
@@ -869,11 +875,13 @@ entity PurchaseDocumentHeader {
         FRGZU                 : String(8)      @title: 'Release Status';
         FRGRL                 : String(1)      @title: 'Release Not Yet Completely Effected';
         to_PurchaseOrderItems : Composition of many PurchaseOrderItem
-                                    on  to_PurchaseOrderItems.EBELN = $self;
+                                            on  to_PurchaseOrderItems.EBELN = EBELN
+                                            and to_PurchaseOrderItems.PSPNR = PSPNR;
 };
- 
+
 entity PurchaseOrderItem {
-    key EBELN       : Association to PurchaseDocumentHeader     @title: 'Purchasing Document Number';
+    key EBELN       : String(10)     @title: 'Purchasing Document Number';
+    key PSPNR       : String(8)      @title: 'WBS Elemnet ID';
     key EBELP       : String(5)      @title: 'Item Number of Purchasing Document';
         UNIQUEID    : String(15)     @title: 'Concatenation of EBELN and EBELP';
         LOEKZ       : String(1)      @title: 'Deletion Indicator in Purchasing Document';
@@ -962,4 +970,3 @@ entity PurchaseOrderItem {
         NTGEW       : Decimal(13, 3) @title: 'Net Weight';
         GEWEI       : String(3)      @title: 'Unit of Weight'
 };
- 
