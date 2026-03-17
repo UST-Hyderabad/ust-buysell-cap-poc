@@ -352,7 +352,7 @@ entity SalesOrderHeader {
         salesOrganization                  : String(4); // VKORG
         distributionChannel                : String(2); // VTWEG
         division                           : String(2); // SPART
-        salesGroup                         : String(3); // VKGRP
+        salesGroup                         : String(4); // VKGRP
         salesOffice                        : String(4); // VKBUR
         businessArea                       : String(4); // GSBER
         costCenter                         : String(10); // GSKST
@@ -609,12 +609,12 @@ entity SalesOrderItem {
         materialGroup              : String(9); // MATKL
         shortText                  : String(40); // ARKTX
 
-        itemCategory               : String(4); // PSTYV
-        itemType                   : String(1); // POSAR
+        itemCategory               : String(8); // PSTYV
+        itemType                   : String(8); // POSAR
         processCode                : String(10); // PROCESS_CODE
 
-        deliveryRelevant           : String(1); // LFREL
-        billingRelevant            : String(1); // FKREL
+        deliveryRelevant           : Boolean; // LFREL
+        billingRelevant            : Boolean; // FKREL
         higherLevelItem            : String(6); // UEPOS
         alternativeItem            : String(6); // GRPOS
         rejectionReason            : String(2); // ABGRU
@@ -625,14 +625,14 @@ entity SalesOrderItem {
         universalBatchParentNode   : String(40); // PRODH_UNIV_BATDET_PARNT_NODID
         universalBatchOrigin       : String(10); // PRODH_UNIV_BATDET_DET_ORIGIN
 
-        targetValue                : Decimal(15, 2); // ZWERT
+        targetValue                : Decimal(15, 3); // ZWERT
         targetQuantity             : Decimal(15, 3); // ZMENG
         targetUnit                 : String(3); // ZIEME
 
         numeratorTargetQty         : Integer; // UMZIZ
         denominatorTargetQty       : Integer; // UMZIN
 
-        baseUnit                   : String(3); // MEINS
+        baseUnit                   : String(5); // MEINS
         substitutionNumerator      : Integer; // SUBSTN_NUMERATOR
         substitutionDenominator    : Integer; // SUBSTN_DENOMINATOR
 
@@ -648,19 +648,19 @@ entity SalesOrderItem {
         usageIndicator             : String(4); // KBVER
         usageIndicator2            : String(4); // KEVER
 
-        salesGroup                 : String(3); // VKGRU
+        salesGroup                 : String(5); // VKGRU
         usageIndicatorSales        : String(3); // VKAUS
-        deliveryGroup              : String(3); // GRKOR
+        deliveryGroup              : String(5); // GRKOR
 
         fixedQuantity              : Decimal(15, 3); // FMENG
-        unlimitedOverdelivery      : String(1); // UEBTK
+        unlimitedOverdelivery      : String(10); // UEBTK
         overdeliveryTolerance      : Decimal(5, 2); // UEBTO
         underdeliveryTolerance     : Decimal(5, 2); // UNTTO
 
         billingBlockItem           : String(2); // FAKSP
 
-        replacementPart            : String(1); // ATPKZ
-        billingIndex               : String(1); // RKFKF
+        replacementPart            : Boolean; // ATPKZ
+        billingIndex               : Boolean; // RKFKF
 
         division                   : String(2); // SPART
         businessArea               : String(4); // GSBER
@@ -672,7 +672,7 @@ entity SalesOrderItem {
         partialDeliveryIndicator   : String(1); // KZTLF
 
         resourceId                 : String(20); // RESOURCE_ID
-        batchSplitAllowed          : String(1); // CHSPL
+        batchSplitAllowed          : Boolean; // CHSPL
 
         orderQuantity              : Decimal(15, 3); // KWMENG
         requiredQuantity           : Decimal(15, 3); // LSMENG
@@ -736,28 +736,28 @@ entity SalesOrderItem {
         pricingUnitOfMeasure       : String(3); // KMEIN
 
         debitCreditIndicator       : String(1); // SHKZG
-        cashDiscountIndicator      : String(1); // SKTOF
+        cashDiscountIndicator      : Boolean; // SKTOF
 
         checkingGroup              : String(4); // MTVFP
-        collectiveBillingIndicator : String(1); // SUMBD
+        collectiveBillingIndicator : Boolean; // SUMBD
 
-        priceGroup                 : String(2); // KONDM
-        accountAssignmentGroup     : String(2); // KTGRM
+        priceGroup                 : String(4); // KONDM
+        accountAssignmentGroup     : String(5); // KTGRM
 
-        bonusIndicator             : String(1); // BONUS
-        commissionGroup            : String(2); // PROVG
+        bonusIndicator             : Boolean; // BONUS
+        commissionGroup            : String(5); // PROVG
         europeanArticleNumber      : String(18); // EANNR
 
-        pricingSource              : String(1); // PRSOK
+        pricingSource              : String(5); // PRSOK
         valuationType              : String(10); // BWTAR
         valuationDescription       : String(40); // BWTEX
 
-        batchManagementRequired    : String(1); // XCHPF
-        batchCharacteristic        : String(1); // XCHAR
+        batchManagementRequired    : Boolean; // XCHPF
+        batchCharacteristic        : String(8); // XCHAR
         batchBillingVariant        : String(10); // BATCH_BILLING_VARIANT
 
         deliveryQuantity           : Decimal(15, 3); // LFMNG
-        statisticsGroup            : String(2); // STAFO
+        statisticsGroup            : String(5); // STAFO
 
         costValue                  : Decimal(15, 2); // WAVWR
 
@@ -772,15 +772,15 @@ entity SalesOrderItem {
         lastChangedOn              : Date; // AEDAT
 
         eanUpc                     : String(18); // EAN11
-        fixedQuantityIndicator     : String(1); // FIXMG
+        fixedQuantityIndicator     : Boolean; // FIXMG
 
         profitCenter               : String(10); // PRCTR
 
-        materialGroup1             : String(3); // MVGR1
-        materialGroup2             : String(3); // MVGR2
-        materialGroup3             : String(3); // MVGR3
-        materialGroup4             : String(3); // MVGR4
-        materialGroup5             : String(3); // MVGR5
+        materialGroup1             : String(5); // MVGR1
+        materialGroup2             : String(5); // MVGR2
+        materialGroup3             : String(5); // MVGR3
+        materialGroup4             : String(5); // MVGR4
+        materialGroup5             : String(5); // MVGR5
 
         componentQuantity          : Decimal(15, 3); // KMPMG
         reasonForSubstitution      : String(4); // SUGRD
@@ -801,7 +801,7 @@ entity SalesOrderItem {
         baseUnitPlanning           : String(3); // PRBME
         referenceUnit              : String(3); // UMREF
 
-        accountAssignmentCategory  : String(1); // KNTTP
+        accountAssignmentCategory  : String(2); // KNTTP
         consumptionPosting         : String(1); // KZVBR
 
         serialNumberProfile        : String(4); // SERNR
@@ -875,8 +875,8 @@ entity PurchaseDocumentHeader {
         FRGZU                 : String(8)      @title: 'Release Status';
         FRGRL                 : String(1)      @title: 'Release Not Yet Completely Effected';
         to_PurchaseOrderItems : Composition of many PurchaseOrderItem
-                                            on  to_PurchaseOrderItems.EBELN = EBELN
-                                            and to_PurchaseOrderItems.PSPNR = PSPNR;
+                                    on  to_PurchaseOrderItems.EBELN = EBELN
+                                    and to_PurchaseOrderItems.PSPNR = PSPNR;
 };
 
 entity PurchaseOrderItem {
