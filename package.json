@@ -41,6 +41,18 @@
         },
         "csrf": true,
         "csrfInBatch": true
+      },
+      "[postgres]": {
+        "db": {
+          "kind": "postgres"
+        },
+        "auth": "dummy"
+      },
+      "[sqlite]": {
+        "db": {
+          "kind": "sqlite"
+        },
+        "auth": "dummy"
       }
     }
   },
