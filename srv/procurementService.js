@@ -1,5 +1,5 @@
 const cds = require('@sap/cds');
-const { INSERT, UPSERT, SELECT } = require('@sap/cds/lib/ql/cds-ql');
+const { UPSERT } = require('@sap/cds/lib/ql/cds-ql');
 
 module.exports = cds.service.impl(async function () {
     const { PurchaseDocumentHeader, PurchaseOrderItem } = this.entities;
