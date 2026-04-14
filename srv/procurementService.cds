@@ -13,11 +13,10 @@ service ProjectsysService {
 
     entity PurchaseDocumentHeader as projection on procurement.PurchaseDocumentHeader;
     entity PurchaseOrderItem as projection on procurement.PurchaseOrderItem;
-    
-    entity temp as projection on S4HSales.A_SalesContract;
-    entity temp1 as projection on S4HSales.A_SalesContractItem;
-    action UpsertSalesContractData() returns String;
 
+    action UpsertSalesContractData() returns String;
+    action UpsertPROJ() returns String;
+    action UpsertWBS() returns String;
 }
 
 
