@@ -1,4 +1,5 @@
 using { ust.buysell.procurement as procurement } from '../db/procurement';
+using { ZAPI_SALES_CONTRACT_SRV as S4HSales} from './external/ZAPI_SALES_CONTRACT_SRV';
 
 service ProjectsysService {
     entity projects as projection on procurement.Project {
@@ -12,6 +13,10 @@ service ProjectsysService {
 
     entity PurchaseDocumentHeader as projection on procurement.PurchaseDocumentHeader;
     entity PurchaseOrderItem as projection on procurement.PurchaseOrderItem;
+
+    action UpsertSalesContractData() returns String;
+    action UpsertPROJ() returns String;
+    action UpsertWBS() returns String;
 
     action LoadPOData();
 }
