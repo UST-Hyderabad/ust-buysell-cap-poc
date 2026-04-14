@@ -34,3 +34,4 @@ mta.yaml
 
 # @cap-js/cds-typer
 @cds-models
+*.env
