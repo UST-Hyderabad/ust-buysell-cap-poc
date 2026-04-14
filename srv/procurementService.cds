@@ -12,6 +12,9 @@ service ProjectsysService {
 
     entity PurchaseDocumentHeader as projection on procurement.PurchaseDocumentHeader;
     entity PurchaseOrderItem as projection on procurement.PurchaseOrderItem;
+
+    action UpsertPROJ() returns String;
+    action UpsertWBS() returns String;
 }
 
 
