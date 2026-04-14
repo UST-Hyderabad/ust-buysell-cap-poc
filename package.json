@@ -12,23 +12,28 @@
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2",
-    "@sap/cds-dk": "^9"
+    "@sap/cds-dk": "^9",
+    "@cap-js/cds-test": ">=0.4.1"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "test": "node --test"
   },
   "cds": {
     "requires": {
+      "db":{
+        "kind": "postgres"
+      },
       "auth": {
         "kind": "dummy"
       },
       "ZAPI_SALES_CONTRACT_SRV": {
         "kind": "odata-v2",
         "model": "srv/external/ZAPI_SALES_CONTRACT_SRV",
-          "credentials": {
-            "destination": "S4H",
-            "path": "/sap/opu/odata/sap/API_SALES_CONTRACT_SRV"
-          },
+        "credentials": {
+          "destination": "S4H",
+          "path": "/sap/opu/odata/sap/API_SALES_CONTRACT_SRV"
+        },
         "csrf": true,
         "csrfInBatch": true
       }

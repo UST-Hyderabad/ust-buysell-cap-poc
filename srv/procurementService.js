@@ -119,77 +119,72 @@ module.exports = cds.service.impl(async function () {
 
     const s4SalesContract = await cds.connect.to("ZAPI_SALES_CONTRACT_SRV");
 
-    this.on('UpsertSalesContract', async (req) => {
+    this.on('UpsertSalesContractData', async (req) => {
 
         try {
 
-            const headerData = await s4SalesContract.run(
-                SELECT.from('A_SalesContract').limit(10)
+            const headers = await s4SalesContract.run(
+                SELECT.from('A_SalesContract').limit(1)
             );
 
-            if (!headerData.length) {
-                return { message: 'No data found' };
+            if (!headers.length) {
+                return { message: 'No header data found' };
             }
+            
+            const contractIds = headers.map(h => h.SalesContract);
 
-            for (const header of headerData) {
+            const items = await s4SalesContract.run(
+                SELECT.from('A_SalesContractItem')
+                    .where({ SalesContract: { in: contractIds } })
+            );
 
-                // ✅ Get items for each contract
-                const items = await s4SalesContract.run(
-                    SELECT.from('A_SalesContractItem')
-                        .where({ SalesContract: header.SalesContract })
-                );
-
-                // ✅ Extract WBS
-                const wbsList = items
+            const itemsByContract = {};
+            for (const item of items) {
+                if (!itemsByContract[item.SalesContract]) {
+                    itemsByContract[item.SalesContract] = [];
+                }
+                itemsByContract[item.SalesContract].push(item);
+            }
+            console.log(itemsByContract);
+            for (const header of headers) {
+                console.log(` Processing Contract: ${header.SalesContract}`);
+                const contractItems = itemsByContract[header.SalesContract] || [];
+                const wbsList = contractItems
                     .map(i => i.WBSElement)
                     .filter(Boolean);
 
                 const uniqueWBS = [...new Set(wbsList)];
+                const wbsElement = uniqueWBS.length ? uniqueWBS[0] : null;
+                const mappedHeader = mapAllFields(header);
 
-                let wbsElement = null;
+                mappedHeader.wbsElement = wbsElement;
+                
+                await UPSERT.into('SalesOrderHeader').entries(mappedHeader);
+                const mappedItems = contractItems.map(item => {
+                    const mappedItem = mapSalesOrderItem(item);
+                    mappedItem.salesOrder = mappedHeader.salesOrder;
+                    console.log(
+                        ` Item: ${item.SalesContractItem} | WBS: ${item.WBSElement || 'N/A'}`
+                    );
 
-                if (uniqueWBS.length > 0) {
-                    wbsElement = uniqueWBS[0];
+                    return mappedItem;
+                });
+
+               
+                if (mappedItems.length > 0) {
+                    await UPSERT.into('SalesOrderItem').entries(mappedItems);
                 }
 
-                // ✅ Map header
-                const mapped = mapAllFields(header);
-
-                mapped.wbsElement = wbsElement;
-
-                // ✅ UPSERT each record
-                await UPSERT.into('SalesOrderHeader').entries(mapped);
-
-                console.log(`Upserted: ${mapped.salesOrder}`);
+                console.log(` Finished Contract: ${header.SalesContract}`);
             }
 
-            return { message: 'Bulk upsert successful' };
+            return { message: 'Header & Item upsert successful' };
 
         } catch (error) {
             console.error("Error occurred:", error);
             return { error: error.message };
         }
 
-    });
-
-    this.on('UpsertSalesContractItem', async (req) => {
-
-        const data = await s4SalesContract.run(
-            SELECT.from('A_SalesContractItem').limit(5)
-        );
-        console.log(data);
-        if (!data.length) {
-            return { message: 'No item data found' };
-        }
-
-        for (const item of data) {
-
-            const mapped = mapSalesOrderItem(item);
-
-            await UPSERT.into('SalesOrderItem').entries(mapped);
-        }
-
-        return { message: 'Item upsert successful' };
     });
 
 });

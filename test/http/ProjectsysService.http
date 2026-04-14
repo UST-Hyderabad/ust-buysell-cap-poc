@@ -3403,7 +3403,7 @@ Content-Type: application/json
 
 ### UpsertSalesContract
 # @name UpsertSalesContract_POST
-POST {{server}}/odata/v4/projectsys/UpsertSalesContract
+POST {{server}}/odata/v4/projectsys/UpsertSalesContractData
 Content-Type: application/json
 
 {}

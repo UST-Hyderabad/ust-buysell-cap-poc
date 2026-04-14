@@ -16,8 +16,8 @@ service ProjectsysService {
     
     entity temp as projection on S4HSales.A_SalesContract;
     entity temp1 as projection on S4HSales.A_SalesContractItem;
-    action UpsertSalesContract() returns String;
-    action UpsertSalesContractItem() returns String;
+    action UpsertSalesContractData() returns String;
+
 }
 
 
