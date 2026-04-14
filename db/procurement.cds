@@ -817,7 +817,7 @@ entity PurchaseDocumentHeader {
         BSART                 : String(4)      @title: 'Purchasing Document Type';
         BSAKZ                 : String(1)      @title: 'Control Indicator for Purchasing Document Type';
         LOEKZ                 : String(1)      @title: 'Deletion Indicator in Purchasing Document';
-        STATU                 : String(1)      @title: 'Status of Purchasing Document';
+        STATU                 : String(2)      @title: 'Status of Purchasing Document';
         AEDAT                 : Date           @title: 'Date on Which Record Was Created';
         ERNAM                 : String(12)     @title: 'Name of Person who Created the Object';
         PINCR                 : String(5)      @title: 'Item Number Interval';
