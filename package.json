@@ -5,11 +5,7 @@
   "dependencies": {
     "@cap-js/postgres": "^2.2.0",
     "@sap/cds": "^9",
-    "express": "^4",
-    "@sap-cloud-sdk/connectivity": "^4",
-    "@sap-cloud-sdk/http-client": "^4",
-    "@sap-cloud-sdk/resilience": "^4",
-    "@sap/xssec": "^4"
+    "express": "^4"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2",
@@ -20,28 +16,6 @@
   },
   "cds": {
     "requires": {
-      "auth": {
-        "kind": "dummy"
-      },
-      "db": {
-        "kind": "postgres",
-        "credentials": {
-        "schema": "public"
-      }
-      },
-      "pool": {
-        "acquireTimeoutMillis": 2000
-      },
-      "OP_API_PROJECT_V3_0001": {
-        "kind": "odata",
-        "model": "srv/external/OP_API_PROJECT_V3_0001",
-        "credentials" :{
-          "destination" : "S4H",
-          "path" : "/sap/opu/odata4/sap/api_project_v3/srvd_a2x/sap/project/0001"
-        },
-        "csrf": true,
-        "csrfInBatch": true
-      },
       "[postgres]": {
         "db": {
           "kind": "postgres"
