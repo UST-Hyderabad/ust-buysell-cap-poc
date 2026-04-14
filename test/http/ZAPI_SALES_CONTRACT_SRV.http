@@ -1,0 +1,733 @@
+@server=http://localhost:4004
+
+
+### A_SalesContract
+# @name A_SalesContract_GET
+GET {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContract
+
+
+
+### A_SalesContract
+# @name A_SalesContract_POST
+POST {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContract
+Content-Type: application/json
+
+{
+  "SalesContract": "t-13972118",
+  "SalesContractType": "2118",
+  "SalesOrganization": "2118",
+  "DistributionChannel": "18",
+  "OrganizationDivision": "18",
+  "SalesGroup": "118",
+  "SalesOffice": "2118",
+  "SalesDistrict": "972118",
+  "SoldToParty": "y-13972118",
+  "CreationDate": "2013-12-01",
+  "CreatedByUser": "ser-13972118",
+  "LastChangeDate": "2011-10-10",
+  "LastChangeDateTime": "2001-09-28T00:00:00.000Z",
+  "PurchaseOrderByCustomer": "PurchaseOrderByCustomer-13972118",
+  "CustomerPurchaseOrderType": "2118",
+  "CustomerPurchaseOrderDate": "2003-10-05",
+  "SalesContractDate": "2004-04-30",
+  "TotalNetAmount": 3647277222893.002,
+  "TransactionCurrency": "72118",
+  "SDDocumentReason": "118",
+  "PricingDate": "2022-04-02",
+  "IncotermsClassification": "118",
+  "IncotermsTransferLocation": "rmsTransferLocation-13972118",
+  "IncotermsLocation1": "IncotermsLocation1-13972118",
+  "IncotermsLocation2": "IncotermsLocation2-13972118",
+  "IncotermsVersion": "2118",
+  "CustomerPaymentTerms": "2118",
+  "PaymentMethod": "8",
+  "SalesContractValidityStartDate": "2022-04-15",
+  "SalesContractValidityEndDate": "2006-11-02",
+  "SalesContractValidityPerdUnit": "8",
+  "SalesContractValidityPerdCat": "18",
+  "SalesContractSignedDate": "2005-02-18",
+  "NmbrOfSalesContractValdtyPerd": "118",
+  "SalesContractFollowUpAction": "2118",
+  "SlsContractFollowUpActionDate": "2016-04-25",
+  "ContractManualCompletion": "8",
+  "ReferenceSDDocument": "t-13972118",
+  "ReferenceSDDocumentCategory": "2118",
+  "SalesDocApprovalStatus": "8",
+  "SalesContractApprovalReason": "2118",
+  "OverallSDProcessStatus": "8",
+  "TotalCreditCheckStatus": "8",
+  "OverallSDDocumentRejectionSts": "8"
+}
+
+
+### A_SalesContract
+# @name A_SalesContract_PATCH
+PATCH {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContract/t-13972118
+Content-Type: application/json
+
+{
+  "SalesContract": "t-13972118",
+  "SalesContractType": "2118",
+  "SalesOrganization": "2118",
+  "DistributionChannel": "18",
+  "OrganizationDivision": "18",
+  "SalesGroup": "118",
+  "SalesOffice": "2118",
+  "SalesDistrict": "972118",
+  "SoldToParty": "y-13972118",
+  "CreationDate": "2013-12-01",
+  "CreatedByUser": "ser-13972118",
+  "LastChangeDate": "2011-10-10",
+  "LastChangeDateTime": "2001-09-28T00:00:00.000Z",
+  "PurchaseOrderByCustomer": "PurchaseOrderByCustomer-13972118",
+  "CustomerPurchaseOrderType": "2118",
+  "CustomerPurchaseOrderDate": "2003-10-05",
+  "SalesContractDate": "2004-04-30",
+  "TotalNetAmount": 3647277222893.002,
+  "TransactionCurrency": "72118",
+  "SDDocumentReason": "118",
+  "PricingDate": "2022-04-02",
+  "IncotermsClassification": "118",
+  "IncotermsTransferLocation": "rmsTransferLocation-13972118",
+  "IncotermsLocation1": "IncotermsLocation1-13972118",
+  "IncotermsLocation2": "IncotermsLocation2-13972118",
+  "IncotermsVersion": "2118",
+  "CustomerPaymentTerms": "2118",
+  "PaymentMethod": "8",
+  "SalesContractValidityStartDate": "2022-04-15",
+  "SalesContractValidityEndDate": "2006-11-02",
+  "SalesContractValidityPerdUnit": "8",
+  "SalesContractValidityPerdCat": "18",
+  "SalesContractSignedDate": "2005-02-18",
+  "NmbrOfSalesContractValdtyPerd": "118",
+  "SalesContractFollowUpAction": "2118",
+  "SlsContractFollowUpActionDate": "2016-04-25",
+  "ContractManualCompletion": "8",
+  "ReferenceSDDocument": "t-13972118",
+  "ReferenceSDDocumentCategory": "2118",
+  "SalesDocApprovalStatus": "8",
+  "SalesContractApprovalReason": "2118",
+  "OverallSDProcessStatus": "8",
+  "TotalCreditCheckStatus": "8",
+  "OverallSDDocumentRejectionSts": "8"
+}
+
+
+### A_SalesContract
+# @name A_SalesContract_DELETE
+DELETE {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContract/t-13972118
+Content-Type: application/json
+
+
+### A_SalesContractItem
+# @name A_SalesContractItem_GET
+GET {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItem
+
+
+
+### A_SalesContractItem
+# @name A_SalesContractItem_POST
+POST {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItem
+Content-Type: application/json
+
+{
+  "SalesContract": "m-22974905",
+  "SalesContractItem": "974905",
+  "HigherLevelItem": "974905",
+  "SalesContractItemCategory": "4905",
+  "SalesContractItemText": "SalesContractItemText-22974905",
+  "PurchaseOrderByCustomer": "PurchaseOrderByCustomer-22974905",
+  "Material": "Material-22974905",
+  "MaterialByCustomer": "MaterialByCustomer-22974905",
+  "PricingDate": "2021-09-05",
+  "RequestedQuantity": 131294442158.618,
+  "RequestedQuantityUnit": "905",
+  "RequestedQuantitySAPUnit": "905",
+  "RequestedQuantityISOUnit": "905",
+  "ItemGrossWeight": 690333631130.711,
+  "ItemNetWeight": 738336512085.356,
+  "ItemWeightUnit": "905",
+  "ItemWeightSAPUnit": "905",
+  "ItemWeightISOUnit": "905",
+  "ItemVolume": 819714842584.419,
+  "ItemVolumeUnit": "905",
+  "ItemVolumeSAPUnit": "905",
+  "ItemVolumeISOUnit": "905",
+  "OutlineAgreementTargetAmount": 45593309854.514,
+  "TransactionCurrency": "74905",
+  "NetAmount": 7275249679218.922,
+  "MaterialGroup": "-22974905",
+  "MaterialPricingGroup": "05",
+  "Batch": "h-22974905",
+  "ProductionPlant": "4905",
+  "StorageLocation": "4905",
+  "ShippingPoint": "4905",
+  "IncotermsClassification": "905",
+  "IncotermsTransferLocation": "rmsTransferLocation-22974905",
+  "IncotermsLocation1": "IncotermsLocation1-22974905",
+  "IncotermsLocation2": "IncotermsLocation2-22974905",
+  "CustomerPaymentTerms": "4905",
+  "SalesDocumentRjcnReason": "05",
+  "ItemBillingBlockReason": "05",
+  "WBSElement": "WBSElement-22974905",
+  "ProfitCenter": "r-22974905",
+  "ReferenceSDDocument": "t-22974905",
+  "ReferenceSDDocumentItem": "974905",
+  "SDProcessStatus": "5",
+  "SalesContractValidityStartDate": "2018-03-10",
+  "SalesContractValidityEndDate": "2021-09-24",
+  "NmbrOfSalesContractValdtyPerd": "905",
+  "SalesContractValidityPerdUnit": "5",
+  "SalesContractValidityPerdCat": "05",
+  "SalesContractSignedDate": "2007-12-13",
+  "SalesContractFollowUpAction": "4905",
+  "SlsContractFollowUpActionDate": "2004-11-13",
+  "SlsContrItemReleasedQuantity": 466823948912.577,
+  "SlsContrItmReldQuantityUnit": "905",
+  "RequirementSegment": "RequirementSegment-22974905",
+  "to_SalesContract": {
+    "SalesContract": "t-13972118"
+  }
+}
+
+
+### A_SalesContractItem
+# @name A_SalesContractItem_PATCH
+PATCH {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItem(SalesContract='m-22974905',SalesContractItem='974905')
+Content-Type: application/json
+
+{
+  "SalesContract": "m-22974905",
+  "SalesContractItem": "974905",
+  "HigherLevelItem": "974905",
+  "SalesContractItemCategory": "4905",
+  "SalesContractItemText": "SalesContractItemText-22974905",
+  "PurchaseOrderByCustomer": "PurchaseOrderByCustomer-22974905",
+  "Material": "Material-22974905",
+  "MaterialByCustomer": "MaterialByCustomer-22974905",
+  "PricingDate": "2021-09-05",
+  "RequestedQuantity": 131294442158.618,
+  "RequestedQuantityUnit": "905",
+  "RequestedQuantitySAPUnit": "905",
+  "RequestedQuantityISOUnit": "905",
+  "ItemGrossWeight": 690333631130.711,
+  "ItemNetWeight": 738336512085.356,
+  "ItemWeightUnit": "905",
+  "ItemWeightSAPUnit": "905",
+  "ItemWeightISOUnit": "905",
+  "ItemVolume": 819714842584.419,
+  "ItemVolumeUnit": "905",
+  "ItemVolumeSAPUnit": "905",
+  "ItemVolumeISOUnit": "905",
+  "OutlineAgreementTargetAmount": 45593309854.514,
+  "TransactionCurrency": "74905",
+  "NetAmount": 7275249679218.922,
+  "MaterialGroup": "-22974905",
+  "MaterialPricingGroup": "05",
+  "Batch": "h-22974905",
+  "ProductionPlant": "4905",
+  "StorageLocation": "4905",
+  "ShippingPoint": "4905",
+  "IncotermsClassification": "905",
+  "IncotermsTransferLocation": "rmsTransferLocation-22974905",
+  "IncotermsLocation1": "IncotermsLocation1-22974905",
+  "IncotermsLocation2": "IncotermsLocation2-22974905",
+  "CustomerPaymentTerms": "4905",
+  "SalesDocumentRjcnReason": "05",
+  "ItemBillingBlockReason": "05",
+  "WBSElement": "WBSElement-22974905",
+  "ProfitCenter": "r-22974905",
+  "ReferenceSDDocument": "t-22974905",
+  "ReferenceSDDocumentItem": "974905",
+  "SDProcessStatus": "5",
+  "SalesContractValidityStartDate": "2018-03-10",
+  "SalesContractValidityEndDate": "2021-09-24",
+  "NmbrOfSalesContractValdtyPerd": "905",
+  "SalesContractValidityPerdUnit": "5",
+  "SalesContractValidityPerdCat": "05",
+  "SalesContractSignedDate": "2007-12-13",
+  "SalesContractFollowUpAction": "4905",
+  "SlsContractFollowUpActionDate": "2004-11-13",
+  "SlsContrItemReleasedQuantity": 466823948912.577,
+  "SlsContrItmReldQuantityUnit": "905",
+  "RequirementSegment": "RequirementSegment-22974905",
+  "to_SalesContract": {
+    "SalesContract": "t-13972118"
+  }
+}
+
+
+### A_SalesContractItem
+# @name A_SalesContractItem_DELETE
+DELETE {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItem(SalesContract='m-22974905',SalesContractItem='974905')
+Content-Type: application/json
+
+
+### A_SalesContractItemPartner
+# @name A_SalesContractItemPartner_GET
+GET {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItemPartner
+
+
+
+### A_SalesContractItemPartner
+# @name A_SalesContractItemPartner_POST
+POST {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItemPartner
+Content-Type: application/json
+
+{
+  "SalesContract": "er-6614989",
+  "SalesContractItem": "614989",
+  "PartnerFunction": "89",
+  "Customer": "er-6614989",
+  "Supplier": "er-6614989",
+  "Personnel": "-6614989",
+  "ContactPerson": "on-6614989",
+  "to_SalesContract": {
+    "SalesContract": "t-13972118"
+  },
+  "to_SalesContractItem": {
+    "SalesContract": "m-22974905",
+    "SalesContractItem": "974905"
+  }
+}
+
+
+### A_SalesContractItemPartner
+# @name A_SalesContractItemPartner_PATCH
+PATCH {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItemPartner(SalesContract='er-6614989',SalesContractItem='614989',PartnerFunction='89')
+Content-Type: application/json
+
+{
+  "SalesContract": "er-6614989",
+  "SalesContractItem": "614989",
+  "PartnerFunction": "89",
+  "Customer": "er-6614989",
+  "Supplier": "er-6614989",
+  "Personnel": "-6614989",
+  "ContactPerson": "on-6614989",
+  "to_SalesContract": {
+    "SalesContract": "t-13972118"
+  },
+  "to_SalesContractItem": {
+    "SalesContract": "m-22974905",
+    "SalesContractItem": "974905"
+  }
+}
+
+
+### A_SalesContractItemPartner
+# @name A_SalesContractItemPartner_DELETE
+DELETE {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItemPartner(SalesContract='er-6614989',SalesContractItem='614989',PartnerFunction='89')
+Content-Type: application/json
+
+
+### A_SalesContractItemPrcgElmnt
+# @name A_SalesContractItemPrcgElmnt_GET
+GET {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItemPrcgElmnt
+
+
+
+### A_SalesContractItemPrcgElmnt
+# @name A_SalesContractItemPrcgElmnt_POST
+POST {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItemPrcgElmnt
+Content-Type: application/json
+
+{
+  "SalesContract": "nt-1442967",
+  "SalesContractItem": "442967",
+  "PricingProcedureStep": "967",
+  "PricingProcedureCounter": "967",
+  "ConditionType": "2967",
+  "PricingDateTime": "teTime-1442967",
+  "ConditionCalculationType": "967",
+  "ConditionBaseValue": 867543501655926.9,
+  "ConditionRateValue": 630414772706531,
+  "ConditionCurrency": "42967",
+  "ConditionQuantity": 12667,
+  "ConditionQuantityUnit": "967",
+  "ConditionQuantitySAPUnit": "967",
+  "ConditionQuantityISOUnit": "967",
+  "ConditionCategory": "7",
+  "ConditionIsForStatistics": false,
+  "PricingScaleType": "7",
+  "IsRelevantForAccrual": false,
+  "CndnIsRelevantForInvoiceList": "7",
+  "ConditionOrigin": "7",
+  "IsGroupCondition": "7",
+  "ConditionRecord": "rd-1442967",
+  "ConditionSequentialNumber": "967",
+  "TaxCode": "67",
+  "WithholdingTaxCode": "67",
+  "CndnRoundingOffDiffAmount": 679.231,
+  "ConditionAmount": 4694153420747.326,
+  "TransactionCurrency": "42967",
+  "ConditionControl": "7",
+  "ConditionInactiveReason": "7",
+  "ConditionClass": "7",
+  "PrcgProcedureCounterForHeader": "967",
+  "FactorForConditionBasisValue": 24.698044774772267,
+  "StructureCondition": "7",
+  "PeriodFactorForCndnBasisValue": 90.90001904607729,
+  "PricingScaleBasis": "967",
+  "ConditionScaleBasisValue": 583987850793055.2,
+  "ConditionScaleBasisUnit": "967",
+  "ConditionScaleBasisCurrency": "42967",
+  "CndnIsRelevantForIntcoBilling": false,
+  "ConditionIsManuallyChanged": false,
+  "ConditionIsForConfiguration": false,
+  "VariantCondition": "VariantCondition-1442967",
+  "to_SalesContract": {
+    "SalesContract": "t-13972118"
+  },
+  "to_SalesContractItem": {
+    "SalesContract": "m-22974905",
+    "SalesContractItem": "974905"
+  }
+}
+
+
+### A_SalesContractItemPrcgElmnt
+# @name A_SalesContractItemPrcgElmnt_PATCH
+PATCH {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItemPrcgElmnt(SalesContract='nt-1442967',SalesContractItem='442967',PricingProcedureStep='967',PricingProcedureCounter='967')
+Content-Type: application/json
+
+{
+  "SalesContract": "nt-1442967",
+  "SalesContractItem": "442967",
+  "PricingProcedureStep": "967",
+  "PricingProcedureCounter": "967",
+  "ConditionType": "2967",
+  "PricingDateTime": "teTime-1442967",
+  "ConditionCalculationType": "967",
+  "ConditionBaseValue": 867543501655926.9,
+  "ConditionRateValue": 630414772706531,
+  "ConditionCurrency": "42967",
+  "ConditionQuantity": 12667,
+  "ConditionQuantityUnit": "967",
+  "ConditionQuantitySAPUnit": "967",
+  "ConditionQuantityISOUnit": "967",
+  "ConditionCategory": "7",
+  "ConditionIsForStatistics": false,
+  "PricingScaleType": "7",
+  "IsRelevantForAccrual": false,
+  "CndnIsRelevantForInvoiceList": "7",
+  "ConditionOrigin": "7",
+  "IsGroupCondition": "7",
+  "ConditionRecord": "rd-1442967",
+  "ConditionSequentialNumber": "967",
+  "TaxCode": "67",
+  "WithholdingTaxCode": "67",
+  "CndnRoundingOffDiffAmount": 679.231,
+  "ConditionAmount": 4694153420747.326,
+  "TransactionCurrency": "42967",
+  "ConditionControl": "7",
+  "ConditionInactiveReason": "7",
+  "ConditionClass": "7",
+  "PrcgProcedureCounterForHeader": "967",
+  "FactorForConditionBasisValue": 24.698044774772267,
+  "StructureCondition": "7",
+  "PeriodFactorForCndnBasisValue": 90.90001904607729,
+  "PricingScaleBasis": "967",
+  "ConditionScaleBasisValue": 583987850793055.2,
+  "ConditionScaleBasisUnit": "967",
+  "ConditionScaleBasisCurrency": "42967",
+  "CndnIsRelevantForIntcoBilling": false,
+  "ConditionIsManuallyChanged": false,
+  "ConditionIsForConfiguration": false,
+  "VariantCondition": "VariantCondition-1442967",
+  "to_SalesContract": {
+    "SalesContract": "t-13972118"
+  },
+  "to_SalesContractItem": {
+    "SalesContract": "m-22974905",
+    "SalesContractItem": "974905"
+  }
+}
+
+
+### A_SalesContractItemPrcgElmnt
+# @name A_SalesContractItemPrcgElmnt_DELETE
+DELETE {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItemPrcgElmnt(SalesContract='nt-1442967',SalesContractItem='442967',PricingProcedureStep='967',PricingProcedureCounter='967')
+Content-Type: application/json
+
+
+### A_SalesContractItemText
+# @name A_SalesContractItemText_GET
+GET {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItemText
+
+
+
+### A_SalesContractItemText
+# @name A_SalesContractItemText_POST
+POST {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItemText
+Content-Type: application/json
+
+{
+  "SalesContract": "t-17862742",
+  "SalesContractItem": "862742",
+  "Language": "42",
+  "LongTextID": "2742",
+  "LongText": "LongText-17862742",
+  "to_SalesContract": {
+    "SalesContract": "t-13972118"
+  },
+  "to_SalesContractItem": {
+    "SalesContract": "m-22974905",
+    "SalesContractItem": "974905"
+  }
+}
+
+
+### A_SalesContractItemText
+# @name A_SalesContractItemText_PATCH
+PATCH {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItemText(SalesContract='t-17862742',SalesContractItem='862742',Language='42',LongTextID='2742')
+Content-Type: application/json
+
+{
+  "SalesContract": "t-17862742",
+  "SalesContractItem": "862742",
+  "Language": "42",
+  "LongTextID": "2742",
+  "LongText": "LongText-17862742",
+  "to_SalesContract": {
+    "SalesContract": "t-13972118"
+  },
+  "to_SalesContractItem": {
+    "SalesContract": "m-22974905",
+    "SalesContractItem": "974905"
+  }
+}
+
+
+### A_SalesContractItemText
+# @name A_SalesContractItemText_DELETE
+DELETE {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractItemText(SalesContract='t-17862742',SalesContractItem='862742',Language='42',LongTextID='2742')
+Content-Type: application/json
+
+
+### A_SalesContractPartner
+# @name A_SalesContractPartner_GET
+GET {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractPartner
+
+
+
+### A_SalesContractPartner
+# @name A_SalesContractPartner_POST
+POST {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractPartner
+Content-Type: application/json
+
+{
+  "SalesContract": "r-21472910",
+  "PartnerFunction": "10",
+  "Customer": "r-21472910",
+  "Supplier": "r-21472910",
+  "Personnel": "21472910",
+  "ContactPerson": "n-21472910",
+  "to_SalesContract": {
+    "SalesContract": "t-13972118"
+  }
+}
+
+
+### A_SalesContractPartner
+# @name A_SalesContractPartner_PATCH
+PATCH {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractPartner(SalesContract='r-21472910',PartnerFunction='10')
+Content-Type: application/json
+
+{
+  "SalesContract": "r-21472910",
+  "PartnerFunction": "10",
+  "Customer": "r-21472910",
+  "Supplier": "r-21472910",
+  "Personnel": "21472910",
+  "ContactPerson": "n-21472910",
+  "to_SalesContract": {
+    "SalesContract": "t-13972118"
+  }
+}
+
+
+### A_SalesContractPartner
+# @name A_SalesContractPartner_DELETE
+DELETE {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractPartner(SalesContract='r-21472910',PartnerFunction='10')
+Content-Type: application/json
+
+
+### A_SalesContractPrcgElmnt
+# @name A_SalesContractPrcgElmnt_GET
+GET {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractPrcgElmnt
+
+
+
+### A_SalesContractPrcgElmnt
+# @name A_SalesContractPrcgElmnt_POST
+POST {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractPrcgElmnt
+Content-Type: application/json
+
+{
+  "SalesContract": "t-24961427",
+  "PricingProcedureStep": "427",
+  "PricingProcedureCounter": "427",
+  "ConditionType": "1427",
+  "PricingDateTime": "eTime-24961427",
+  "ConditionCalculationType": "427",
+  "ConditionBaseValue": 668875386413185.8,
+  "ConditionRateValue": 132899920731560.5,
+  "ConditionCurrency": "61427",
+  "ConditionQuantity": 69518,
+  "ConditionQuantityUnit": "427",
+  "ConditionQuantitySAPUnit": "427",
+  "ConditionQuantityISOUnit": "427",
+  "ConditionCategory": "7",
+  "ConditionIsForStatistics": false,
+  "PricingScaleType": "7",
+  "ConditionOrigin": "7",
+  "IsGroupCondition": "7",
+  "ConditionRecord": "d-24961427",
+  "ConditionSequentialNumber": "427",
+  "TaxCode": "27",
+  "WithholdingTaxCode": "27",
+  "CndnRoundingOffDiffAmount": 425.047,
+  "ConditionAmount": 6144558467743.091,
+  "TransactionCurrency": "61427",
+  "ConditionControl": "7",
+  "ConditionInactiveReason": "7",
+  "ConditionClass": "7",
+  "PrcgProcedureCounterForHeader": "427",
+  "FactorForConditionBasisValue": 25.596140330691764,
+  "StructureCondition": "7",
+  "PeriodFactorForCndnBasisValue": 93.52280110016588,
+  "PricingScaleBasis": "427",
+  "ConditionScaleBasisValue": 695629365853744.6,
+  "ConditionScaleBasisUnit": "427",
+  "ConditionScaleBasisCurrency": "61427",
+  "CndnIsRelevantForIntcoBilling": false,
+  "ConditionIsManuallyChanged": false,
+  "ConditionIsForConfiguration": false,
+  "VariantCondition": "VariantCondition-24961427",
+  "to_SalesContract": {
+    "SalesContract": "t-13972118"
+  }
+}
+
+
+### A_SalesContractPrcgElmnt
+# @name A_SalesContractPrcgElmnt_PATCH
+PATCH {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractPrcgElmnt(SalesContract='t-24961427',PricingProcedureStep='427',PricingProcedureCounter='427')
+Content-Type: application/json
+
+{
+  "SalesContract": "t-24961427",
+  "PricingProcedureStep": "427",
+  "PricingProcedureCounter": "427",
+  "ConditionType": "1427",
+  "PricingDateTime": "eTime-24961427",
+  "ConditionCalculationType": "427",
+  "ConditionBaseValue": 668875386413185.8,
+  "ConditionRateValue": 132899920731560.5,
+  "ConditionCurrency": "61427",
+  "ConditionQuantity": 69518,
+  "ConditionQuantityUnit": "427",
+  "ConditionQuantitySAPUnit": "427",
+  "ConditionQuantityISOUnit": "427",
+  "ConditionCategory": "7",
+  "ConditionIsForStatistics": false,
+  "PricingScaleType": "7",
+  "ConditionOrigin": "7",
+  "IsGroupCondition": "7",
+  "ConditionRecord": "d-24961427",
+  "ConditionSequentialNumber": "427",
+  "TaxCode": "27",
+  "WithholdingTaxCode": "27",
+  "CndnRoundingOffDiffAmount": 425.047,
+  "ConditionAmount": 6144558467743.091,
+  "TransactionCurrency": "61427",
+  "ConditionControl": "7",
+  "ConditionInactiveReason": "7",
+  "ConditionClass": "7",
+  "PrcgProcedureCounterForHeader": "427",
+  "FactorForConditionBasisValue": 25.596140330691764,
+  "StructureCondition": "7",
+  "PeriodFactorForCndnBasisValue": 93.52280110016588,
+  "PricingScaleBasis": "427",
+  "ConditionScaleBasisValue": 695629365853744.6,
+  "ConditionScaleBasisUnit": "427",
+  "ConditionScaleBasisCurrency": "61427",
+  "CndnIsRelevantForIntcoBilling": false,
+  "ConditionIsManuallyChanged": false,
+  "ConditionIsForConfiguration": false,
+  "VariantCondition": "VariantCondition-24961427",
+  "to_SalesContract": {
+    "SalesContract": "t-13972118"
+  }
+}
+
+
+### A_SalesContractPrcgElmnt
+# @name A_SalesContractPrcgElmnt_DELETE
+DELETE {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractPrcgElmnt(SalesContract='t-24961427',PricingProcedureStep='427',PricingProcedureCounter='427')
+Content-Type: application/json
+
+
+### A_SalesContractText
+# @name A_SalesContractText_GET
+GET {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractText
+
+
+
+### A_SalesContractText
+# @name A_SalesContractText_POST
+POST {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractText
+Content-Type: application/json
+
+{
+  "SalesContract": "t-11401917",
+  "Language": "17",
+  "LongTextID": "1917",
+  "LongText": "LongText-11401917",
+  "to_SalesContract": {
+    "SalesContract": "t-13972118"
+  }
+}
+
+
+### A_SalesContractText
+# @name A_SalesContractText_PATCH
+PATCH {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractText(SalesContract='t-11401917',Language='17',LongTextID='1917')
+Content-Type: application/json
+
+{
+  "SalesContract": "t-11401917",
+  "Language": "17",
+  "LongTextID": "1917",
+  "LongText": "LongText-11401917",
+  "to_SalesContract": {
+    "SalesContract": "t-13972118"
+  }
+}
+
+
+### A_SalesContractText
+# @name A_SalesContractText_DELETE
+DELETE {{server}}/odata/v4/zapi-sales-contract-srv/A_SalesContractText(SalesContract='t-11401917',Language='17',LongTextID='1917')
+Content-Type: application/json
+
+
+### releaseApprovalRequest
+# @name releaseApprovalRequest_POST
+POST {{server}}/odata/v4/zapi-sales-contract-srv/releaseApprovalRequest
+Content-Type: application/json
+
+{
+  "SalesContract": "t-23479832"
+}
+
+
+### rejectApprovalRequest
+# @name rejectApprovalRequest_POST
+POST {{server}}/odata/v4/zapi-sales-contract-srv/rejectApprovalRequest
+Content-Type: application/json
+
+{
+  "SalesContract": "ct-5164692"
+}

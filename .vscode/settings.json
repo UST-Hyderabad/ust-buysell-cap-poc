@@ -7,5 +7,13 @@
     // "csv (semicolon)",
     // "tab",
     // "tsv"
+  ],
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "name": "SalesContract",
+      "database": "${workspaceFolder:ust-buysell-cap-poc}/db.sqlite"
+    }
   ]
 }

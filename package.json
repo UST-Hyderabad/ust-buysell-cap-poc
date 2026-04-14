@@ -6,10 +6,10 @@
     "@cap-js/postgres": "^2.2.0",
     "@sap/cds": "^9",
     "express": "^4",
+    "@cap-js/postgres": "^2",
     "@sap-cloud-sdk/connectivity": "^4",
     "@sap-cloud-sdk/http-client": "^4",
-    "@sap-cloud-sdk/resilience": "^4",
-    "@sap/xssec": "^4"
+    "@sap-cloud-sdk/resilience": "^4"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2",
@@ -28,6 +28,12 @@
       "auth": {
         "kind": "dummy"
       },
+      "ZAPI_SALES_CONTRACT_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/ZAPI_SALES_CONTRACT_SRV",
+        "credentials": {
+          "destination": "S4H",
+          "path": "/sap/opu/odata/sap/API_SALES_CONTRACT_SRV"
       "pool": {
         "acquireTimeoutMillis": 2000
       },
