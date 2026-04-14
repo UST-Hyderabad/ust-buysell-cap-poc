@@ -338,10 +338,10 @@ function mapSalesOrderItem(data) {
 module.exports = cds.service.impl(async function () {
 
     const s4SalesContract = await cds.connect.to("ZAPI_SALES_CONTRACT_SRV");
-  
-  
-    const { projects, WBSElements } = this.entities;
     const s4hprojects = await cds.connect.to("OP_API_PROJECT_V3_0001");
+
+
+    const { projects, WBSElements } = this.entities;
 
     this.on('UpsertPROJ', async (req) => {
         try {
@@ -479,7 +479,7 @@ module.exports = cds.service.impl(async function () {
             if (!headers.length) {
                 return { message: 'No header data found' };
             }
-            
+
             const contractIds = headers.map(h => h.SalesContract);
 
             const items = await s4SalesContract.run(
@@ -507,7 +507,7 @@ module.exports = cds.service.impl(async function () {
                 const mappedHeader = mapAllFields(header);
 
                 mappedHeader.wbsElement = wbsElement;
-                
+
                 await UPSERT.into('SalesOrderHeader').entries(mappedHeader);
                 const mappedItems = contractItems.map(item => {
                     const mappedItem = mapSalesOrderItem(item);
@@ -519,7 +519,7 @@ module.exports = cds.service.impl(async function () {
                     return mappedItem;
                 });
 
-               
+
                 if (mappedItems.length > 0) {
                     await UPSERT.into('SalesOrderItem').entries(mappedItems);
                 }
@@ -533,10 +533,10 @@ module.exports = cds.service.impl(async function () {
             console.error("Error occurred:", error);
             return { error: error.message };
         }
-       const { PurchaseDocumentHeader, PurchaseOrderItem } = this.entities;
 
+    })
 
-
+    const { PurchaseDocumentHeader, PurchaseOrderItem } = this.entities;
 
     const PO_api = await cds.connect.to('ZAPI_PURCHASEORDER_PROCESS_SRV');
 
@@ -573,7 +573,7 @@ module.exports = cds.service.impl(async function () {
                         method: 'GET',
                         path: `/A_PurchaseOrder?$filter=PurchaseOrder eq '${PurchaseOrders}'`
                     });
-                   // console.log(res_PurchaseOrders);
+                    // console.log(res_PurchaseOrders);
 
                     res_PurchaseOrders = res_PurchaseOrders.map(item => ({
                         ...item,
@@ -598,7 +598,7 @@ module.exports = cds.service.impl(async function () {
 
             })
         )
-        
+
 
         const vPurchaseDocumentHeader = purchaseOrders.map(po => ({
             EBELN: po.PurchaseOrder || '',
@@ -636,7 +636,7 @@ module.exports = cds.service.impl(async function () {
         //console.log(vPurchaseDocumentHeader)
 
         await UPSERT.into(PurchaseDocumentHeader).entries(vPurchaseDocumentHeader);
-        
+
         const vPurchaseOrderItem = purchaseOrderItems.map(item => {
             return {
                 EBELN_EBELN: item.PurchaseOrder || '',
@@ -689,5 +689,4 @@ module.exports = cds.service.impl(async function () {
 
     });
 
-    });
-
+});

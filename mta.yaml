@@ -25,6 +25,8 @@ modules:
           srv-url: ${default-url}
     requires:
       - name: postgreSQL
+      - name: ust_buysell_poc-destination
+      - name: ust_buysell_poc-connectivity
 
   - name: ust_buysell_poc-postgres-deployer
     type: nodejs
@@ -45,3 +47,13 @@ resources:
     parameters:
       service: postgresql-db
       service-plan: free
+  - name: ust_buysell_poc-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+  - name: ust_buysell_poc-connectivity
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
