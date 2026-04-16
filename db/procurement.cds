@@ -331,7 +331,7 @@ entity WBSElements {
 entity SalesOrderHeader {
 
     key salesOrder                         : String(10); // VBELN
-        wbsElement                         : String(8); // PSPNR
+        wbsElement                         : String(24); // PSPNR
         createdOn                          : Date; // ERDAT
         createdTime                        : Time; // ERZET
         createdBy                          : String(12); // ERNAM
@@ -601,7 +601,7 @@ entity SalesOrderHeader {
 entity SalesOrderItem {
     key salesOrder                 : String(10); // VBELN
     key itemNumber                 : String(6); // POSNR
-        wbsElement                 : String(8); // PSPNR
+        wbsElement                 : String(24); // PSPNR
         material                   : String(40); // MATNR
         enteredMaterial            : String(40); // MATWA
         pricingReferenceMaterial   : String(40); // PMATN

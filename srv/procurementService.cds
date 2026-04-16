@@ -17,6 +17,6 @@ service ProjectsysService {
     action UpsertPROJ() returns String;
     action UpsertWBS() returns String;
 
-    action LoadPOData();
+    action LoadPOData() returns String ;
 }
 

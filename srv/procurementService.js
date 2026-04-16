@@ -667,7 +667,7 @@ module.exports = cds.service.impl(async function () {
                         'BasicDatesLastScheduledDate',
                         'FcstdDatesLastScheduledDate'
                     ])
-                    .limit(1)
+                    .limit(100)
             );
 
             const transformed = data.map(mapS4ToPROJ);
@@ -692,7 +692,7 @@ module.exports = cds.service.impl(async function () {
     this.on('UpsertWBS', async (req) => {
         try {
             const tx = cds.tx(req)
-            const data = await s4hprojects.run(SELECT.from('WBSElement').limit(2));
+            const data = await s4hprojects.run(SELECT.from('WBSElement').limit(100));
             const transformed = data.map(mapS4ToWBS);
             console.log("data", data);
             console.log("transformed", transformed);
@@ -911,14 +911,14 @@ module.exports = cds.service.impl(async function () {
  
         //HEADER MAPPING and limiting
         const vPurchaseDocumentHeader = maps4toPO(purchaseOrders);
-        const vPurchaseDocumentHeaderLimited = vPurchaseDocumentHeader.slice(0,2);
+        const vPurchaseDocumentHeaderLimited = vPurchaseDocumentHeader.slice(0,20);
  
         //UPSERT PO HEADER DATA
         await UPSERT.into(PurchaseDocumentHeader).entries(vPurchaseDocumentHeaderLimited);
  
         //Items MAPPING and limiting
         const vPurchaseOrderItem = maps4toPOItems(purchaseOrderItems);
-        const vPurchaseDocumentItemsLimited = vPurchaseOrderItem.slice(0,2);
+        const vPurchaseDocumentItemsLimited = vPurchaseOrderItem.slice(0,20);
        
         //UPSERTING PO ITEMS DATA
         await UPSERT.into(PurchaseOrderItem).entries(vPurchaseDocumentItemsLimited);
