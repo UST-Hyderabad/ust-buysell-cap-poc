@@ -1,9 +1,9 @@
 const cds = require('@sap/cds');
-
+ 
 const { UPSERT, SELECT } = require("@sap/cds/lib/ql/cds-ql");
-
-
-
+ 
+ 
+ 
 const mapS4ToPROJ = (p) => ({
     PSPNR: p.ProjectInternalID,
     PSPID: p.ProjectExternalID,
@@ -127,8 +127,8 @@ const mapS4ToPROJ = (p) => ({
     CPCURR_code: p.Currency || "",
     PROJ_STATUS: p.StatusCombinationCode?.toString() || ""
 });
-
-
+ 
+ 
 const mapS4ToWBS = (p) => ({
     PSPNR: p.WBSElementInternalID,
     POSID: p.WBSElementExternalID,
@@ -219,11 +219,11 @@ const mapS4ToWBS = (p) => ({
     VERTN: p.DistributionProfile,
     ASTNR: p.ApplicantCode
 });
-
+ 
 function mapAllFields(data) {
     return {
         salesOrder: data.SalesContract,
-
+ 
         // Organization
         salesOrganization: data.SalesOrganization,
         distributionChannel: data.DistributionChannel,
@@ -231,7 +231,7 @@ function mapAllFields(data) {
         salesGroup: data.SalesGroup,
         salesOffice: data.SalesOffice,
         soldToParty: data.SoldToParty,
-
+ 
         // Dates
         createdOn: data.CreationDate,
         createdBy: data.CreatedByUser,
@@ -240,23 +240,23 @@ function mapAllFields(data) {
         purchaseOrderDate: data.CustomerPurchaseOrderDate,
         validityStartDate: data.SalesContractValidityStartDate,
         validityEndDate: data.SalesContractValidityEndDate,
-
+ 
         // Commercial
         netValue: Number(data.TotalNetAmount),
-
+ 
         currency: data.TransactionCurrency
             ? { code: data.TransactionCurrency }
             : null,
-
+ 
         // Document
         salesDocumentType: data.SalesContractType,
         customerPurchaseOrder: data.PurchaseOrderByCustomer,
         purchaseOrderType: data.CustomerPurchaseOrderType,
         precedingDocument: data.ReferenceSDDocument,
-
+ 
         // Payment
         paymentMethod: data.PaymentMethod,
-
+ 
         // Status
         approvalStatus: data.SalesDocApprovalStatus,
         approvalReason: data.SalesContractApprovalReason,
@@ -265,191 +265,427 @@ function mapAllFields(data) {
         overallRejectionStatus: data.OverallSDDocumentRejectionSts
     };
 }
-
+ 
 function mapSalesOrderItem(data) {
     return {
         // Keys
         salesOrder: data.SalesContract,
         itemNumber: data.SalesContractItem,
-
+ 
         // Basic
         wbsElement: data.WBSElement,
         material: data.Material,
         enteredMaterial: data.Material,
         customerMaterial: data.MaterialByCustomer,
-
+ 
         shortText: data.SalesContractItemText,
         itemCategory: data.SalesContractItemCategory,
-
+ 
         higherLevelItem: data.HigherLevelItem,
-
+ 
         // Quantity
         orderQuantity: Number(data.RequestedQuantity),
         salesUnit: data.RequestedQuantityUnit,
-
+ 
         // Weight
         grossWeight: Number(data.ItemGrossWeight),
         netWeight: Number(data.ItemNetWeight),
         weightUnit: data.ItemWeightUnit,
-
+ 
         // Volume
         volume: Number(data.ItemVolume),
         volumeUnit: data.ItemVolumeUnit,
-
+ 
         // Pricing
         netValueItem: Number(data.NetAmount),
-
+ 
         currency: data.TransactionCurrency
             ? { code: data.TransactionCurrency }
             : null,
-
+ 
         // Material / Plant
         materialGroup: data.MaterialGroup,
         plant: data.ProductionPlant,
         storageLocation: data.StorageLocation,
         shippingPoint: data.ShippingPoint,
-
+ 
         // Batch
         batch: data.Batch,
-
+ 
         // Incoterms (if you later extend CDS)
         // incotermsClassification: data.IncotermsClassification,
-
+ 
         // Payment
         // (not directly in your item CDS)
-
+ 
         // Status
         rejectionReason: data.SalesDocumentRjcnReason,
         billingBlockItem: data.ItemBillingBlockReason,
-
+ 
         // Profitability
         profitCenter: data.ProfitCenter,
-
+ 
         // Reference
         referenceDocument: data.ReferenceSDDocument,
         referenceItem: data.ReferenceSDDocumentItem,
-
+ 
         // Validity
         validityStartDate: data.SalesContractValidityStartDate,
         validityEndDate: data.SalesContractValidityEndDate
     };
 }
+ 
+function maps4toPO(data) {
+    return data.map(item => ({
+        EBELN: item.PurchaseOrder,
+        PSPNR: item.WBSElement || '',
 
+        BUKRS: item.CompanyCode || '',
+        BSTYP: '',
+        BSART: item.PurchaseOrderType || '',
+        BSAKZ: '',
+ 
+        LOEKZ: item.PurchasingDocumentDeletionCode || '',
+        STATU: item.PurchasingProcessingStatus || '',
+ 
+        AEDAT: parseODataDate(item.CreationDate),
+        ERNAM: item.CreatedByUser || '',
+ 
+        PINCR: '',
+        LPONR: '',
+ 
+        LIFNR: item.Supplier || '',
+        SPRAS: item.Language || '',
+        ZTERM: item.PaymentTerms || '',
+ 
+        ZBD1T: parseInt(item.CashDiscount1Days, 10) || 0,
+        ZBD2T: parseInt(item.CashDiscount2Days, 10) || 0,
+        ZBD3T: 0,
+ 
+        ZBD1P: parseFloat(item.CashDiscount1Percent) || 0,
+        ZBD2P: parseFloat(item.CashDiscount2Percent) || 0,
+ 
+        EKORG: item.PurchasingOrganization || '',
+        EKGRP: item.PurchasingGroup || '',
+        WAERS: item.DocumentCurrency || '',
+ 
+        WKURS: parseFloat(item.ExchangeRate) || 0,
+        KUFIX: item.ExchangeRateIsFixed ? 'X' : '',
+ 
+        BEDAT: parseODataDate(item.PurchaseOrderDate),
+        KDATB: parseODataDate(item.ValidityStartDate),
+        KDATE: parseODataDate(item.ValidityEndDate),
+ 
+        BWBDT: null,
+        ANGDT: null,
+        BNDDT: null,
+        GWLDT: null,
+ 
+        AUSNR: '',
+        ANGNR: '',
+ 
+        IHRAN: null,
+        IHREZ: '',
+ 
+        VERKF: item.SupplierRespSalesPersonName || '',
+        TELF1: item.SupplierPhoneNumber || '',
+ 
+        LLIEF: item.SupplyingSupplier || '',
+        KUNNR: '',
+ 
+        KONNR: '',
+ 
+        ABGRU: '',
+        AUTLF: '',
+        WEAKT: '',
+ 
+        RESWK: item.SupplyingPlant || '',
+        LBLIF: '',
+ 
+        INCO1: item.IncotermsClassification || '',
+        INCO2: '',
+ 
+        KTWRT: 0,
+ 
+        SUBMI: item.PurchasingCollectiveNumber || '',
+        KNUMV: '',
+        KALSM: '',
+ 
+        STAFO: '',
+ 
+        LIFRE: item.InvoicingParty || '',
+ 
+        EXNUM: '',
+        UNSEZ: '',
+        LOGSY: '',
+ 
+        UPINC: '',
+        STAKO: '',
+ 
+        FRGGR: '',
+        FRGSX: '',
+        FRGKE: '',
+        FRGZU: '',
+ 
+        FRGRL: item.ReleaseIsNotCompleted ? 'X' : ''
+    }));
+}
+function maps4toPOItems(data) {
+    return data.map(item => ({
+        EBELN: item.PurchaseOrder,
+        EBELP: item.PurchaseOrderItem,
+        PSPNR: item.WBSElement,
+ 
+        UNIQUEID: (item.PurchaseOrder || '') + (item.PurchaseOrderItem || ''),
+ 
+        LOEKZ: item.PurchasingDocumentDeletionCode || '',
+        TXZ01: item.PurchaseOrderItemText || '',
+        MATNR: item.Material || '',
+        EMATN: item.ManufacturerMaterial || '',
+ 
+        WERKS: item.Plant || '',
+        LGORT: item.StorageLocation || '',
+        MATKL: item.MaterialGroup || '',
+ 
+        INFNR: item.PurchasingInfoRecord || '',
+        IDNLF: item.SupplierMaterialNumber || '',
+ 
+        MENGE: parseFloat(item.OrderQuantity) || 0,
+        MEINS: item.PurchaseOrderQuantityUnit || '',
+        BPRME: item.OrderPriceUnit || '',
+ 
+        BPUMZ: parseInt(item.OrderPriceUnitToOrderUnitNmrtr, 10) || 0,
+        BPUMN: parseInt(item.OrdPriceUnitToOrderUnitDnmntr, 10) || 0,
+ 
+        NETPR: parseFloat(item.NetPriceAmount) || 0,
+        PEINH: parseInt(item.NetPriceQuantity, 10) || 0,
+ 
+        MWSKZ: item.TaxCode || '',
+        TXDAT: parseODataDate(item.TaxDeterminationDate),
+        TAX_COUNTRY: item.TaxCountry || '',
+ 
+        PRSDR: item.PriceIsToBePrinted ? 'X' : '',
+        ELIKZ: item.IsCompletelyDelivered ? 'X' : '',
+        EREKZ: item.IsFinallyInvoiced ? 'X' : '',
+ 
+        UEBTO: parseFloat(item.OverdelivTolrtdLmtRatioInPct) || 0,
+        UEBTK: item.UnlimitedOverdeliveryIsAllowed ? 'X' : '',
+        UNTTO: parseFloat(item.UnderdelivTolrtdLmtRatioInPct) || 0,
+ 
+        BWTAR: item.ValuationType || '',
+ 
+        PSTYP: item.PurchaseOrderItemCategory || '',
+        KNTTP: item.AccountAssignmentCategory || '',
+        VRTKZ: item.MultipleAcctAssgmtDistribution || '',
+        TWRKZ: item.PartialInvoiceDistribution || '',
+ 
+        WEPOS: item.GoodsReceiptIsExpected ? 'X' : '',
+        WEUNB: item.GoodsReceiptIsNonValuated ? 'X' : '',
+        REPOS: item.InvoiceIsExpected ? 'X' : '',
+        WEBRE: item.InvoiceIsGoodsReceiptBased ? 'X' : '',
+ 
+        KONNR: item.PurchaseContract || '',
+        KTPNR: parseInt(item.PurchaseContractItem, 10) || 0,
+ 
+        EVERS: item.ShippingInstruction || '',
+        KUNNR: item.Customer || '',
+ 
+        NTGEW: parseFloat(item.ItemNetWeight) || 0,
+        GEWEI: item.ItemWeightUnit || '',
+ 
+        PLIFZ: parseInt(item.PlannedDeliveryTimeInDays, 10) || 0,
+        STATU: '',
+        AEDAT: null,
+        BUKRS: '',
+        BEDNR: '',
+ 
+        KTMNG: 0,
+ 
+        UMREZ: 0,
+        UMREN: 0,
+ 
+        NETWR: 0,
+        BRTWR: 0,
+ 
+        AGDAT: null,
+        WEBAZ: 0,
+ 
+        TXDAT_FROM: null,
+ 
+        BONUS: '',
+        INSMK: '',
+        SPINF: '',
+        SCHPR: '',
+ 
+        MAHNZ: 0,
+        MAHN1: 0,
+        MAHN2: 0,
+        MAHN3: 0,
+ 
+        BWTTY: '',
+ 
+        ABSKZ: '',
+        AGMEM: '',
+ 
+        KZVBR: '',
+ 
+        KZABS: '',
+        LABNR: '',
+ 
+        ABDAT: null,
+        ABFTZ: 0,
+ 
+        ETFZ1: 0,
+        ETFZ2: 0,
+ 
+        KZSTU: '',
+        NOTKZ: '',
+ 
+        LMEIN: '',
+ 
+        ZWERT: 0,
+        NAVNW: 0,
+        ABMNG: 0,
+ 
+        PRDAT: null,
+        BSTYP: '',
+ 
+        EFFWR: 0,
+        XOBLR: '',
+ 
+        ADRNR: '',
+        EKKOL: '',
+ 
+        SKTOF: '',
+        STAFO: ''
+    }));
+}
+ 
+function parseODataDate(odataDateStr) {
+    if (!odataDateStr) return null;
+    const match = odataDateStr.match(/\/Date\((.*?)\)\//);
+    if (match && match[1]) {
+ 
+        return new Date(parseInt(match[1], 10));
+    }
+    return null;
+}
+ 
 module.exports = cds.service.impl(async function () {
-
+ 
     const s4SalesContract = await cds.connect.to("ZAPI_SALES_CONTRACT_SRV");
     const s4hprojects = await cds.connect.to("OP_API_PROJECT_V3_0001");
-
-
-    const { projects, WBSElements } = this.entities;
-
+    const s4PurchaseContract = await cds.connect.to('ZAPI_PURCHASEORDER_PROCESS_SRV');
+ 
+    const { projects, WBSElements,PurchaseDocumentHeader, PurchaseOrderItem } = this.entities;
+ 
     this.on('UpsertPROJ', async (req) => {
         try {
-
+ 
             const data = await s4hprojects.run(
                 SELECT.from('Project')
                     .columns([
                         'ProjectInternalID',
                         'ProjectExternalID',
                         'ProjectDescription',
-
+ 
                         'CompanyCode',
                         'ControllingArea',
                         'ProfitCenter',
                         'BusinessArea',
                         'Plant',
-
+ 
                         'CreatedByUser',
                         'CreationDate',
                         'LastChangedByUser',
                         'LastChangeDate',
-
+ 
                         'ResponsiblePerson',
                         'ResponsiblePersonName',
                         'ApplicantCode',
                         'ApplicantName',
-
+ 
                         'PlannedStartDate',
                         'PlannedEndDate',
                         'ForecastedStartDate',
                         'ForecastedEndDate',
-
+ 
                         'FactoryCalendar',
                         'SchedulingDurationUnit',
-
+ 
                         'ProjectProfileCode',
                         'BudgetProfile',
                         'PlanningProfile',
                         'InvestmentProfile',
                         'NetworkProfile',
                         'WBSSchedulingProfile',
-
+ 
                         'ProjInterestCalcProfile',
                         'ResultAnalysisInternalID',
                         'ControllingObjectClass',
-
+ 
                         'DistributionProfile',
                         'PartnerDeterminationProcedure',
-
+ 
                         'FunctionalArea',
                         'SalesOrganization',
                         'DistributionChannel',
                         'Division',
-
+ 
                         'DynItemProcessorPrfl',
-
+ 
                         'JointVenture',
                         'JointVentureCostRecoveryCode',
                         'JointVentureEquityType',
                         'JointVentureObjectType',
                         'JntIntrstBillgClass',
                         'JntIntrstBillgSubClass',
-
+ 
                         'SimulationProfile',
                         'SchedulingScenario',
-
+ 
                         'Currency',
                         'TaxJurisdiction',
                         'WorkCenterLocation',
-
+ 
                         'PlanningMethForProjBasicDate',
                         'PlanningMethForProjFcstdDate',
-
+ 
                         'WBSIsStatisticalWBSElement',
                         'WBSIsMarkedForIntegratedPlng',
                         'ProjectHasOwnStock',
                         'InventorySpecialStockValnType',
                         'WBSIsMarkedForAutomReqmtGrpg',
-
+ 
                         'StatusProfile',
                         'WBSStatusProfile',
                         'StatusCombinationCode',
-
+ 
                         'BasicDatesLastScheduledDate',
                         'FcstdDatesLastScheduledDate'
                     ])
                     .limit(1)
             );
-
+ 
             const transformed = data.map(mapS4ToPROJ);
-
+ 
             const tx = cds.tx(req);
-
+ 
             await tx.run(
                 UPSERT.into(projects).entries(transformed)
             );
-
+ 
             return {
                 message: "Upsert Successful",
                 count: transformed.length
             };
-
+ 
         } catch (err) {
             console.error("Error in UpsertPROJ:", err);
             req.error(500, err.message);
         }
     });
-
+ 
     this.on('UpsertWBS', async (req) => {
         try {
             const tx = cds.tx(req)
@@ -467,26 +703,26 @@ module.exports = cds.service.impl(async function () {
             req.error(500, err.message);
         }
     })
-
+ 
     this.on('UpsertSalesContractData', async (req) => {
-
+ 
         try {
-
+ 
             const headers = await s4SalesContract.run(
                 SELECT.from('A_SalesContract').limit(1)
             );
-
+ 
             if (!headers.length) {
                 return { message: 'No header data found' };
             }
-
+ 
             const contractIds = headers.map(h => h.SalesContract);
-
+ 
             const items = await s4SalesContract.run(
                 SELECT.from('A_SalesContractItem')
                     .where({ SalesContract: { in: contractIds } })
             );
-
+ 
             const itemsByContract = {};
             for (const item of items) {
                 if (!itemsByContract[item.SalesContract]) {
@@ -501,13 +737,13 @@ module.exports = cds.service.impl(async function () {
                 const wbsList = contractItems
                     .map(i => i.WBSElement)
                     .filter(Boolean);
-
+ 
                 const uniqueWBS = [...new Set(wbsList)];
                 const wbsElement = uniqueWBS.length ? uniqueWBS[0] : null;
                 const mappedHeader = mapAllFields(header);
-
+ 
                 mappedHeader.wbsElement = wbsElement;
-
+ 
                 await UPSERT.into('SalesOrderHeader').entries(mappedHeader);
                 const mappedItems = contractItems.map(item => {
                     const mappedItem = mapSalesOrderItem(item);
@@ -515,178 +751,121 @@ module.exports = cds.service.impl(async function () {
                     console.log(
                         ` Item: ${item.SalesContractItem} | WBS: ${item.WBSElement || 'N/A'}`
                     );
-
+ 
                     return mappedItem;
                 });
-
-
+ 
+ 
                 if (mappedItems.length > 0) {
                     await UPSERT.into('SalesOrderItem').entries(mappedItems);
                 }
-
+ 
                 console.log(` Finished Contract: ${header.SalesContract}`);
             }
-
+ 
             return { message: 'Header & Item upsert successful' };
-
+ 
         } catch (error) {
             console.error("Error occurred:", error);
             return { error: error.message };
         }
-
+ 
     })
-
-    const { PurchaseDocumentHeader, PurchaseOrderItem } = this.entities;
-
-    const PO_api = await cds.connect.to('ZAPI_PURCHASEORDER_PROCESS_SRV');
-
+   
     this.on('LoadPOData', async (req) => {
-
-        function parseODataDate(odataDateStr) {
-            if (!odataDateStr) return null;
-            const match = odataDateStr.match(/\/Date\((.*?)\)\//);
-            if (match && match[1]) {
-
-                return new Date(parseInt(match[1], 10));
-            }
-            return null;
-        }
-
-
-
-        const resultEkko = await PO_api.send({
+ 
+        //Fetch WBS Source
+        const resultEkko = await s4PurchaseContract.send({
             method: 'GET',
-            path: '/A_PurOrdAccountAssignment?$select=PurchaseOrder,PurchaseOrderItem,WBSElementInternalID&$filter=WBSElementExternalID ne null'
+            path: `/A_PurOrdAccountAssignment?$select=PurchaseOrder,PurchaseOrderItem,WBSElementInternalID&$filter=WBSElementExternalID ne null`
         });
+        //console.log(resultEkko);
+        if (!resultEkko?.length) {
+            return req.error(400, 'No data received from API');
+        }
+ 
+        //ITEM LEVEL WBS MAP(mapping wbs to Item)
+        const wbsMap = {};
+ 
+        resultEkko.forEach(item => {
+            const po = item.PurchaseOrder;
+            const poItem = String(item.PurchaseOrderItem).padStart(5, '0');
+            const key = `${po}_${poItem}`;
+ 
+            wbsMap[key] = item.WBSElementInternalID;
+        });
+ 
+        //HEADER LEVEL WBS MAP (Mapping one WBS to Header)
+        const headerWbsMap = {};
+ 
+        resultEkko.forEach(item => {
+            const po = item.PurchaseOrder;
+            const wbs = item.WBSElementInternalID;
+ 
+            headerWbsMap[po] = wbs;
+        });
+ 
+        //UNIQUE POs
+        const uniquePOs = [...new Set(resultEkko.map(i => i.PurchaseOrder))];
+ 
+        let purchaseOrders = [];
+        let purchaseOrderItems = [];
+ 
+        //FETCHING PO DATA
+        let poData = await s4PurchaseContract.run(
+            SELECT.from('A_PurchaseOrder').where({ PurchaseOrder: { in: uniquePOs } })
+        );
+        // console.log(poData);
 
-        const purchaseOrders = [];
-        const purchaseOrderItems = [];
-        await Promise.all(
-
-            resultEkko.map(async (item) => {
-                try {
-                    const PurchaseOrders = item.PurchaseOrder;
-                    const PurchaseOrderItems = item.PurchaseOrderItem;
-                    const WBSElementInternalID = item.WBSElementInternalID;
-
-                    let res_PurchaseOrders = await PO_api.send({
-                        method: 'GET',
-                        path: `/A_PurchaseOrder?$filter=PurchaseOrder eq '${PurchaseOrders}'`
-                    });
-                    // console.log(res_PurchaseOrders);
-
-                    res_PurchaseOrders = res_PurchaseOrders.map(item => ({
-                        ...item,
-                        WBSElement: WBSElementInternalID
-                    }));
-                    purchaseOrders.push(...res_PurchaseOrders);
-                    //doubt to get all Items or only Items with WBS Element but leads data inconsistency?
-                    let res_PurchaseOrderItems = await PO_api.send({
-                        method: 'GET',
-                        path: `A_PurchaseOrderItem?$format=json&$filter=PurchaseOrder eq '${PurchaseOrders}' and PurchaseOrderItem eq '${PurchaseOrderItems}'`
-                    });
-                    // console.log(res_PurchaseOrderItems);
-
-                    res_PurchaseOrderItems = res_PurchaseOrderItems.map(item => ({
-                        ...item,
-                        WBSElement: WBSElementInternalID
-                    }));
-                    purchaseOrderItems.push(...res_PurchaseOrderItems);
-                } catch (error) {
-                    console.log(error);
-                }
-
-            })
-        )
-
-
-        const vPurchaseDocumentHeader = purchaseOrders.map(po => ({
-            EBELN: po.PurchaseOrder || '',
-            PSPNR: po.WBSElement || '',
-            BUKRS: po.CompanyCode || '',
-            BSART: po.PurchaseOrderType || '',
-            LOEKZ: po.PurchasingDocumentDeletionCode || '',
-            STATU: po.PurchasingProcessingStatus || '',
-            AEDAT: parseODataDate(po.CreationDate),
-            ERNAM: po.CreatedByUser || '',
-            LIFNR: po.Supplier || '',
-            SPRAS: po.Language || '',
-            ZTERM: po.PaymentTerms || '',
-            ZBD1T: parseFloat(po.CashDiscount1Days) || 0,
-            ZBD2T: parseFloat(po.CashDiscount2Days) || 0,
-            ZBD1P: parseFloat(po.CashDiscount1Percent) || 0,
-            ZBD2P: parseFloat(po.CashDiscount2Percent) || 0,
-            EKORG: po.PurchasingOrganization || '',
-            EKGRP: po.PurchasingGroup || '',
-            WAERS: po.DocumentCurrency || '',
-            WKURS: parseFloat(po.ExchangeRate) || 0,
-            KUFIX: po.ExchangeRateIsFixed ? 'X' : '',
-            BEDAT: parseODataDate(po.PurchaseOrderDate),
-            KDATB: parseODataDate(po.ValidityStartDate),
-            KDATE: parseODataDate(po.ValidityEndDate),
-            SUBMI: po.PurchasingCollectiveNumber || '',
-            VERKF: po.SupplierRespSalesPersonName || '',
-            TELF1: po.SupplierPhoneNumber || '',
-            LLIEF: po.SupplyingSupplier || '',
-            RESWK: po.SupplyingPlant || '',
-            INCO1: po.IncotermsClassification || '',
-            LIFRE: po.InvoicingParty || '',
-            FRGRL: po.ReleaseIsNotCompleted ? 'X' : ''
-        }));
-        //console.log(vPurchaseDocumentHeader)
-
-        await UPSERT.into(PurchaseDocumentHeader).entries(vPurchaseDocumentHeader);
-
-        const vPurchaseOrderItem = purchaseOrderItems.map(item => {
+        //Adding WBS to PO DATA
+        purchaseOrders = poData.map(item => {
+            const key = item.PurchaseOrder;
             return {
-                EBELN_EBELN: item.PurchaseOrder || '',
-                EBELN_PSPNR: item.WBSElement || '',
-                EBELP: item.PurchaseOrderItem || '',
-                UNIQUEID: (item.PurchaseOrder || '') + (item.PurchaseOrderItem || ''),
-                LOEKZ: item.PurchasingDocumentDeletionCode || '',
-                TXZ01: item.PurchaseOrderItemText || '',
-                MATNR: item.Material || '',
-                WERKS: item.Plant || '',
-                LGORT: item.StorageLocation || '',
-                MATKL: item.MaterialGroup || '',
-                INFNR: item.PurchasingInfoRecord || '',
-                IDNLF: item.SupplierMaterialNumber || '',
-                MENGE: parseFloat(item.OrderQuantity) || 0,
-                MEINS: item.PurchaseOrderQuantityUnit || '',
-                BPRME: item.OrderPriceUnit || '',
-                BPUMZ: parseInt(item.OrderPriceUnitToOrderUnitNmrtr, 10) || 0,
-                BPUMN: parseInt(item.OrdPriceUnitToOrderUnitDnmntr, 10) || 0,
-                NETPR: parseFloat(item.NetPriceAmount) || 0,
-                PEINH: parseInt(item.NetPriceQuantity, 10) || 0,
-                MWSKZ: item.TaxCode || '',
-                TXDAT: parseODataDate(item.TaxDeterminationDate),
-                TAX_COUNTRY: item.TaxCountry || '',
-                PRSDR: item.PriceIsToBePrinted ? 'X' : '',
-                UEBTO: parseFloat(item.OverdelivTolrtdLmtRatioInPct) || 0,
-                UEBTK: item.UnlimitedOverdeliveryIsAllowed ? 'X' : '',
-                UNTTO: parseFloat(item.UnderdelivTolrtdLmtRatioInPct) || 0,
-                BWTAR: item.ValuationType || '',
-                ELIKZ: item.IsCompletelyDelivered ? 'X' : '',
-                EREKZ: item.IsFinallyInvoiced ? 'X' : '',
-                PSTYP: item.PurchaseOrderItemCategory || '',
-                KNTTP: item.AccountAssignmentCategory || '',
-                VRTKZ: item.MultipleAcctAssgmtDistribution || '',
-                TWRKZ: item.PartialInvoiceDistribution || '',
-                WEPOS: item.GoodsReceiptIsExpected ? 'X' : '',
-                WEUNB: item.GoodsReceiptIsNonValuated ? 'X' : '',
-                REPOS: item.InvoiceIsExpected ? 'X' : '',
-                WEBRE: item.InvoiceIsGoodsReceiptBased ? 'X' : '',
-                KONNR: item.PurchaseContract || '',
-                KTPNR: parseFloat(item.PurchaseContractItem) || 0,
-                EVERS: item.ShippingInstruction || '',
-                KUNNR: item.Customer || '',
-                NTGEW: parseFloat(item.ItemNetWeight) || 0,
-                GEWEI: item.ItemWeightUnit || ''
+                ...item,
+                WBSElement: headerWbsMap[key]
             };
         });
-        //console.log(vPurchaseOrderItem);
-        await UPSERT.into(PurchaseOrderItem).entries(vPurchaseOrderItem);
+        //FETCH PO ITEMS DATA
+        let poItemsData = await s4PurchaseContract.run(
+            SELECT.from('A_PurchaseOrderItem').where({ PurchaseOrder: { in: uniquePOs } })
+        );
+ 
+        //Adding WBS to PO ITEMSDATA
+        purchaseOrderItems = poItemsData.map(item => {
+            const po = item.PurchaseOrder;
+            const poItem = String(item.PurchaseOrderItem).padStart(5, '0');
+            const key = `${po}_${poItem}`;
+            return {
+                ...item,
+                WBSElement: wbsMap[key] ||'NO WBS'
+            };
+        });
+ 
+ 
+        //console.log(purchaseOrders);
+        //console.log(purchaseOrderItems)
+ 
+        //HEADER MAPPING and limiting
+        const vPurchaseDocumentHeader = maps4toPO(purchaseOrders);
+        const vPurchaseDocumentHeaderLimited = vPurchaseDocumentHeader.slice(0,2);
+ 
+        //UPSERT PO HEADER DATA
+        await UPSERT.into(PurchaseDocumentHeader).entries(vPurchaseDocumentHeaderLimited);
 
+        //Items MAPPING and limiting
+        const vPurchaseOrderItem = maps4toPOItems(purchaseOrderItems);
+        const vPurchaseDocumentItemsLimited = vPurchaseOrderItem.slice(0,2);
+        
+        //UPSERTING PO ITEMS DATA
+        await UPSERT.into(PurchaseOrderItem).entries(vPurchaseDocumentItemsLimited);
+ 
+        return {
+            message: 'Data loaded successfully',
+            headers: vPurchaseDocumentHeaderLimited.length,
+            items: vPurchaseDocumentItemsLimited.length
+        };
     });
-
+ 
 });
+ 
+ 
